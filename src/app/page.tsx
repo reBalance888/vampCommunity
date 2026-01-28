@@ -115,31 +115,30 @@ export default function Home() {
         <div className="container mx-auto px-4 py-20">
           <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-4xl font-bold text-white text-center">
-              Why Vamp Exists
+              The future is being built right now
             </h2>
 
             <div className="space-y-6 text-center">
               <p className="text-lg text-zinc-300 leading-relaxed">
-                Vibecoding is <span className="text-vamp-purple font-semibold">democratizing software development</span>.
-                Anyone with an idea can now build. But there&apos;s a problem.
+                Developers are shipping <span className="text-vamp-purple font-semibold">products in hours</span> that used to take months.
+                AI turned an idea into a live app before your coffee gets cold.
               </p>
               <p className="text-xl text-white font-semibold">
-                Discoverability is broken. 💔
+                But nobody&apos;s watching. 👀
               </p>
               <p className="text-lg text-zinc-300 leading-relaxed">
-                Amazing vibecoded projects are scattered across Twitter threads, GitHub repos,
-                and personal blogs. There&apos;s no single place to discover what&apos;s possible when
-                AI meets human creativity.
+                Thousands of insane projects get lost in the noise — buried in threads,
+                forgotten in repos, invisible to the world. The best work goes unseen.
               </p>
             </div>
 
             <div className="glass rounded-2xl p-8 space-y-4">
               <p className="text-xl text-white font-semibold text-center">
-                Vamp Community solves this. 🦇
+                Vamp changes that. 🦇
               </p>
               <p className="text-lg text-zinc-300 text-center">
-                We&apos;re <span className="text-vamp-fuchsia font-semibold">Product Hunt for vibecoding</span> —
-                a single place to discover, share, and celebrate vibecoded projects.
+                One place to <span className="text-vamp-fuchsia font-semibold">discover, get discovered, and get funded</span> —
+                built by vibecoders, for vibecoders.
               </p>
             </div>
 
