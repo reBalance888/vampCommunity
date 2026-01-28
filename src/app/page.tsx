@@ -7,13 +7,12 @@ import { grants } from '@/data/grants'
 import { vibecoders } from '@/data/vibecoders'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { ProductOfTheDay } from '@/components/home/ProductOfTheDay'
-import { VibecodeExplainer } from '@/components/home/VibecodeExplainer'
 import { WeeklyTopProjects } from '@/components/home/WeeklyTopProjects'
 import { CommunityVoices } from '@/components/home/CommunityVoices'
 import { RecentActivity } from '@/components/home/RecentActivity'
 import { ToolsPopularity } from '@/components/home/ToolsPopularity'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Sparkles, Code2, Trophy } from 'lucide-react'
+import { ArrowRight, Code2, Trophy } from 'lucide-react'
 import { AnimatedCounter } from '@/components/home/AnimatedCounter'
 import { BentoFeatures } from '@/components/home/BentoFeatures'
 
@@ -56,12 +55,6 @@ export default function Home() {
 
         <div className="container mx-auto px-4 py-20 md:py-32 relative">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm">
-              <Sparkles className="w-4 h-4 text-vamp-purple" />
-              <span className="text-zinc-300">Product Hunt for Vibecoding</span>
-            </div>
-
             {/* Headline */}
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               <span className="text-gradient">Where Vibecoders</span>
@@ -73,9 +66,6 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto">
               The home for vibecoded projects. Discover what&apos;s possible when AI meets creativity.
             </p>
-
-            {/* Vibecoding Explainer */}
-            <VibecodeExplainer />
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
