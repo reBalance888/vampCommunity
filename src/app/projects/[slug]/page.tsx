@@ -7,6 +7,9 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { ExternalLink, Github, Twitter, ArrowLeft } from 'lucide-react'
+import { SimilarProjects } from '@/components/projects/SimilarProjects'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
+import { CopyLinkButton } from '@/components/projects/CopyLinkButton'
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -24,19 +27,36 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${project.title} - Vamp Community`,
     description: project.description,
+    keywords: [
+      'vibecoding',
+      'AI development',
+      project.title,
+      ...project.tools,
+      ...project.categories,
+    ],
     openGraph: {
-      title: `${project.title} - Vibecoded Project`,
-      description: project.description,
+      title: `${project.title} - Built with Vibecoding 🦇`,
+      description: `${project.description} | Built with ${project.tools.slice(0, 2).join(', ')}`,
       url: projectUrl,
-      images: [project.image],
+      siteName: 'Vamp Community',
+      images: [
+        {
+          url: project.image,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        }
+      ],
+      locale: 'en_US',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: project.title,
-      description: project.description,
+      title: `${project.title} 🦇`,
+      description: `${project.description} | Built with ${project.tools.slice(0, 2).join(', ')}`,
       images: [project.image],
       creator: `@${project.author.twitter}`,
+      site: '@KSimback',
     },
   }
 }
@@ -59,6 +79,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
         </Link>
+        <Breadcrumbs items={[
+          { label: 'Projects', href: '/projects' },
+          { label: project.title }
+        ]} />
       </div>
 
       {/* Hero Image */}
@@ -140,6 +164,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 </a>
               </Button>
             )}
+            <CopyLinkButton />
           </div>
 
           {/* Description */}
@@ -186,6 +211,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
+
+      {/* Similar Projects */}
+      <SimilarProjects currentProject={project} maxResults={3} />
     </div>
   )
 }

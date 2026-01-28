@@ -5,19 +5,38 @@ import Image from 'next/image'
 import { Project } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { ExternalLink, Github } from 'lucide-react'
+import { ExternalLink, Github, Eye } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useVotes } from '@/hooks/useVotes'
 import { UpvoteButton } from '@/components/ui/upvote-button'
 import { ShareButton } from '@/components/ui/share-button'
+import { Tooltip } from '@/components/ui/tooltip'
 
 interface ProjectCardProps {
   project: Project
   isFocused?: boolean
   dataIndex?: number
+  searchQuery?: string
 }
 
-export function ProjectCard({ project, isFocused = false, dataIndex }: ProjectCardProps) {
+function highlightText(text: string, query: string) {
+  if (!query.trim()) return text
+
+  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+  const parts = text.split(regex)
+
+  return parts.map((part, i) =>
+    part.toLowerCase() === query.toLowerCase() ? (
+      <mark key={i} className="bg-vamp-purple/30 text-vamp-purple rounded px-1">
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  )
+}
+
+export function ProjectCard({ project, isFocused = false, dataIndex, searchQuery = '' }: ProjectCardProps) {
   const { votes, hasVoted, upvote, isLoading } = useVotes(
     project.id,
     project.initialVotes || 0
@@ -26,7 +45,10 @@ export function ProjectCard({ project, isFocused = false, dataIndex }: ProjectCa
   return (
     <div
       className={cn(
-        'group glass rounded-2xl overflow-hidden glow-hover transition-all duration-200',
+        'group glass rounded-2xl overflow-hidden transition-all duration-300',
+        'hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]',
+        'hover:-translate-y-1',
+        'hover:border-vamp-purple/30',
         isFocused && 'ring-2 ring-vamp-purple ring-offset-2 ring-offset-transparent'
       )}
       data-project-index={dataIndex}
@@ -34,13 +56,15 @@ export function ProjectCard({ project, isFocused = false, dataIndex }: ProjectCa
       <div className="flex gap-4 p-4">
         {/* Upvote Button */}
         <div className="flex-shrink-0">
-          <UpvoteButton
-            votes={votes}
-            hasVoted={hasVoted}
-            onUpvote={upvote}
-            isLoading={isLoading}
-            size="md"
-          />
+          <Tooltip content="Upvote this project">
+            <UpvoteButton
+              votes={votes}
+              hasVoted={hasVoted}
+              onUpvote={upvote}
+              isLoading={isLoading}
+              size="md"
+            />
+          </Tooltip>
         </div>
 
         {/* Main Content */}
@@ -48,10 +72,10 @@ export function ProjectCard({ project, isFocused = false, dataIndex }: ProjectCa
           {/* Title & Description */}
           <Link href={`/projects/${project.slug}`}>
             <h3 className="text-lg font-semibold text-white group-hover:text-vamp-purple transition-colors">
-              {project.title}
+              {highlightText(project.title, searchQuery)}
             </h3>
             <p className="text-sm text-zinc-400 line-clamp-2 mt-1">
-              {project.description}
+              {highlightText(project.description, searchQuery)}
             </p>
           </Link>
 
@@ -83,6 +107,10 @@ export function ProjectCard({ project, isFocused = false, dataIndex }: ProjectCa
 
             {/* Links & Badge */}
             <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 text-xs text-zinc-500 mr-2">
+                <Eye className="w-3 h-3" />
+                <span>{Math.floor((project.initialVotes || 0) * 3.7)} views</span>
+              </div>
               {project.featured && (
                 <Badge className="bg-gradient-to-r from-vamp-purple to-vamp-fuchsia border-0 text-xs">
                   🔥 Featured

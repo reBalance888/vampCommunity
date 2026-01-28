@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import { projects } from '@/data/projects'
 import { grants } from '@/data/grants'
+import { vibecoders } from '@/data/vibecoders'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { ProductOfTheDay } from '@/components/home/ProductOfTheDay'
 import { VibecodeExplainer } from '@/components/home/VibecodeExplainer'
 import { WeeklyTopProjects } from '@/components/home/WeeklyTopProjects'
 import { CommunityVoices } from '@/components/home/CommunityVoices'
+import { RecentActivity } from '@/components/home/RecentActivity'
+import { ToolsPopularity } from '@/components/home/ToolsPopularity'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Sparkles, Code2, Trophy } from 'lucide-react'
 
@@ -19,6 +22,12 @@ export default function Home() {
     <main className="min-h-screen bg-vamp-darker">
       {/* Hero */}
       <section className="relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-vamp-purple/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-vamp-fuchsia/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        </div>
+
         {/* Background glow effect */}
         <div className="absolute inset-0 bg-gradient-radial from-vamp-purple/20 via-transparent to-transparent blur-3xl" />
 
@@ -60,21 +69,28 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* Stats */}
+            {/* Stats with Animation */}
             <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
-              <div className="space-y-2">
-                <p className="text-4xl font-bold text-gradient">{projects.length}+</p>
-                <p className="text-sm text-zinc-500">Projects</p>
+              <div className="space-y-2 group cursor-default">
+                <p className="text-4xl font-bold text-gradient transition-transform group-hover:scale-110 duration-300">
+                  {projects.length}+
+                </p>
+                <p className="text-sm text-zinc-500">Projects Launched</p>
+                <div className="h-1 bg-gradient-to-r from-vamp-purple to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="space-y-2">
-                <p className="text-4xl font-bold text-gradient">
+              <div className="space-y-2 group cursor-default">
+                <p className="text-4xl font-bold text-gradient transition-transform group-hover:scale-110 duration-300">
                   ${grants.reduce((sum, g) => sum + g.amount, 0) / 1000}K+
                 </p>
                 <p className="text-sm text-zinc-500">in Grants</p>
+                <div className="h-1 bg-gradient-to-r from-vamp-fuchsia to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="space-y-2">
-                <p className="text-4xl font-bold text-gradient">50+</p>
+              <div className="space-y-2 group cursor-default">
+                <p className="text-4xl font-bold text-gradient transition-transform group-hover:scale-110 duration-300">
+                  {vibecoders.length}+
+                </p>
                 <p className="text-sm text-zinc-500">Vibecoders</p>
+                <div className="h-1 bg-gradient-to-r from-vamp-pink to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </div>
           </div>
@@ -279,6 +295,12 @@ export default function Home() {
 
       {/* Community Voices */}
       <CommunityVoices />
+
+      {/* Recent Activity */}
+      <RecentActivity />
+
+      {/* Tools Popularity */}
+      <ToolsPopularity />
 
       {/* CTA */}
       <section className="container mx-auto px-4 py-20">

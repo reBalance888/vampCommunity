@@ -1,9 +1,13 @@
+'use client'
+
 import { Resource } from '@/types'
 import { Badge } from '@/components/ui/badge'
-import { ExternalLink, Video, FileText, Wrench, Twitter, BookOpen, Lightbulb } from 'lucide-react'
+import { ExternalLink, Video, FileText, Wrench, Twitter, BookOpen, Bookmark } from 'lucide-react'
 
 interface ResourceCardProps {
   resource: Resource
+  onToggleBookmark?: (id: string) => void
+  isBookmarked?: boolean
 }
 
 const typeIcons = {
@@ -14,7 +18,7 @@ const typeIcons = {
   course: BookOpen,
 }
 
-export function ResourceCard({ resource }: ResourceCardProps) {
+export function ResourceCard({ resource, onToggleBookmark, isBookmarked = false }: ResourceCardProps) {
   const TypeIcon = typeIcons[resource.type] || FileText
 
   return (
@@ -50,7 +54,26 @@ export function ResourceCard({ resource }: ResourceCardProps) {
                 {resource.description}
               </p>
             </div>
-            <ExternalLink className="w-4 h-4 text-zinc-500 flex-shrink-0 mt-1" />
+            <div className="flex items-center gap-2">
+              {onToggleBookmark && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    onToggleBookmark(resource.id)
+                  }}
+                  className={`p-2 rounded-lg transition-colors ${
+                    isBookmarked
+                      ? 'bg-vamp-purple text-white'
+                      : 'hover:bg-white/5 text-zinc-500'
+                  }`}
+                  title={isBookmarked ? 'Remove bookmark' : 'Bookmark'}
+                >
+                  <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
+                </button>
+              )}
+              <ExternalLink className="w-4 h-4 text-zinc-500 flex-shrink-0" />
+            </div>
           </div>
 
           {/* Meta */}

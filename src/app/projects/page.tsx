@@ -7,22 +7,44 @@ import { SubmitProjectDialog } from '@/components/submit/SubmitProjectDialog'
 import { useKeyboardNav } from '@/hooks/useKeyboardNav'
 import { Search, Plus, Keyboard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { KeyboardShortcutsToast } from '@/components/projects/KeyboardShortcutsToast'
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [sortBy, setSortBy] = useState<'votes' | 'recent'>('votes')
   const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false)
+  const [selectedTools, setSelectedTools] = useState<string[]>([])
+  const [dateFilter, setDateFilter] = useState<'all' | 'week' | 'month' | 'year'>('all')
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
+
+  const allTools = useMemo(() => {
+    const toolSet = new Set<string>()
+    projects.forEach(p => p.tools.forEach(tool => toolSet.add(tool)))
+    return Array.from(toolSet).sort()
+  }, [])
 
   const filteredProjects = useMemo(() => {
     let filtered = projects.filter(project => {
       const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            project.description.toLowerCase().includes(searchQuery.toLowerCase())
       const matchesCategory = selectedCategory === 'all' || project.categories.includes(selectedCategory)
-      return matchesSearch && matchesCategory
+      const matchesTools = selectedTools.length === 0 ||
+                          selectedTools.some(tool => project.tools.includes(tool))
+
+      let matchesDate = true
+      if (dateFilter !== 'all') {
+        const projectDate = new Date(project.createdAt)
+        const now = new Date()
+        const daysAgo = Math.floor((now.getTime() - projectDate.getTime()) / (1000 * 60 * 60 * 24))
+        if (dateFilter === 'week') matchesDate = daysAgo <= 7
+        else if (dateFilter === 'month') matchesDate = daysAgo <= 30
+        else if (dateFilter === 'year') matchesDate = daysAgo <= 365
+      }
+
+      return matchesSearch && matchesCategory && matchesTools && matchesDate
     })
 
-    // Sort by votes or recent
     if (sortBy === 'votes') {
       filtered = filtered.sort((a, b) => (b.initialVotes || 0) - (a.initialVotes || 0))
     } else {
@@ -30,7 +52,7 @@ export default function ProjectsPage() {
     }
 
     return filtered
-  }, [searchQuery, selectedCategory, sortBy])
+  }, [searchQuery, selectedCategory, selectedTools, dateFilter, sortBy])
 
   const { focusIndex } = useKeyboardNav({ totalItems: filteredProjects.length })
 
@@ -75,22 +97,127 @@ export default function ProjectsPage() {
             />
           </div>
 
-          {/* Category Tabs */}
+          {/* Category Tabs with Counts */}
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            {projectCategories.map(category => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
-                  selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-vamp-purple to-vamp-fuchsia text-white'
-                    : 'bg-vamp-dark text-zinc-400 hover:text-white hover:bg-zinc-800'
-                }`}
-              >
-                {category.icon} {category.name}
-              </button>
-            ))}
+            {projectCategories.map(category => {
+              const count = category.id === 'all'
+                ? projects.length
+                : projects.filter(p => p.categories.includes(category.id)).length
+
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  disabled={count === 0 && category.id !== 'all'}
+                  className={`px-4 py-2 rounded-lg whitespace-nowrap transition-all flex items-center gap-2 ${
+                    selectedCategory === category.id
+                      ? 'bg-gradient-to-r from-vamp-purple to-vamp-fuchsia text-white'
+                      : count === 0 && category.id !== 'all'
+                      ? 'bg-vamp-dark text-zinc-600 cursor-not-allowed opacity-50'
+                      : 'bg-vamp-dark text-zinc-400 hover:text-white hover:bg-zinc-800'
+                  }`}
+                >
+                  <span>{category.icon} {category.name}</span>
+                  <span className={`text-xs px-1.5 py-0.5 rounded ${
+                    selectedCategory === category.id
+                      ? 'bg-white/20 text-white'
+                      : 'bg-zinc-800 text-zinc-600'
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              )
+            })}
           </div>
+
+          {/* Advanced Filters Toggle */}
+          <div className="mt-4">
+            <button
+              onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+              className="text-sm text-vamp-purple hover:text-vamp-fuchsia transition-colors flex items-center gap-2"
+            >
+              <span>{showAdvancedFilters ? '▼' : '▶'}</span>
+              <span>Advanced Filters</span>
+              {(selectedTools.length > 0 || dateFilter !== 'all') && (
+                <span className="px-2 py-0.5 rounded-full bg-vamp-purple/20 text-vamp-purple text-xs">
+                  Active
+                </span>
+              )}
+            </button>
+          </div>
+
+          {/* Advanced Filters Panel */}
+          {showAdvancedFilters && (
+            <div className="mt-4 p-4 glass rounded-xl space-y-4 animate-in slide-in-from-top-2">
+              {/* Tools Filter */}
+              <div>
+                <label className="text-sm font-medium text-white mb-2 block">
+                  Filter by Tools
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {allTools.slice(0, 12).map(tool => (
+                    <button
+                      key={tool}
+                      onClick={() => {
+                        setSelectedTools(prev =>
+                          prev.includes(tool)
+                            ? prev.filter(t => t !== tool)
+                            : [...prev, tool]
+                        )
+                      }}
+                      className={`px-3 py-1 rounded-lg text-sm transition-all ${
+                        selectedTools.includes(tool)
+                          ? 'bg-vamp-purple text-white'
+                          : 'bg-vamp-dark text-zinc-400 hover:text-white hover:bg-zinc-800'
+                      }`}
+                    >
+                      {tool}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Date Filter */}
+              <div>
+                <label className="text-sm font-medium text-white mb-2 block">
+                  Submitted
+                </label>
+                <div className="flex gap-2">
+                  {([
+                    { value: 'all', label: 'All Time' },
+                    { value: 'week', label: 'Past Week' },
+                    { value: 'month', label: 'Past Month' },
+                    { value: 'year', label: 'Past Year' }
+                  ] as const).map(option => (
+                    <button
+                      key={option.value}
+                      onClick={() => setDateFilter(option.value)}
+                      className={`px-3 py-1 rounded-lg text-sm transition-all ${
+                        dateFilter === option.value
+                          ? 'bg-vamp-purple text-white'
+                          : 'bg-vamp-dark text-zinc-400 hover:text-white hover:bg-zinc-800'
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Clear Filters */}
+              {(selectedTools.length > 0 || dateFilter !== 'all') && (
+                <button
+                  onClick={() => {
+                    setSelectedTools([])
+                    setDateFilter('all')
+                  }}
+                  className="text-sm text-zinc-500 hover:text-white transition-colors"
+                >
+                  Clear advanced filters
+                </button>
+              )}
+            </div>
+          )}
 
           {/* Sort & Results */}
           <div className="mt-4 flex items-center justify-between">
@@ -207,6 +334,7 @@ export default function ProjectsPage() {
                 project={project}
                 isFocused={focusIndex === index}
                 dataIndex={index}
+                searchQuery={searchQuery}
               />
             ))}
           </div>
@@ -226,6 +354,9 @@ export default function ProjectsPage() {
           </div>
         </div>
       </div>
+
+      {/* Keyboard Shortcuts Toast */}
+      <KeyboardShortcutsToast />
 
       {/* Submit Dialog */}
       <SubmitProjectDialog

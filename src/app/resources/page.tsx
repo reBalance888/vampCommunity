@@ -3,20 +3,24 @@
 import { useState, useMemo } from 'react'
 import { resources, resourceCategories } from '@/data/resources'
 import { ResourceCard } from '@/components/resources/ResourceCard'
-import { Search } from 'lucide-react'
+import { useBookmarks } from '@/hooks/useBookmarks'
+import { Search, Bookmark } from 'lucide-react'
 
 export default function ResourcesPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [showBookmarked, setShowBookmarked] = useState(false)
+  const { toggleBookmark, isBookmarked, count: bookmarkCount } = useBookmarks()
 
   const filteredResources = useMemo(() => {
     return resources.filter(resource => {
       const matchesSearch = resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            resource.description.toLowerCase().includes(searchQuery.toLowerCase())
       const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory
-      return matchesSearch && matchesCategory
+      const matchesBookmark = !showBookmarked || isBookmarked(resource.id)
+      return matchesSearch && matchesCategory && matchesBookmark
     })
-  }, [searchQuery, selectedCategory])
+  }, [searchQuery, selectedCategory, showBookmarked, isBookmarked])
 
   return (
     <div className="min-h-screen bg-vamp-darker">
@@ -68,6 +72,21 @@ export default function ResourcesPage() {
           <div className="mt-4 text-sm text-zinc-500">
             {filteredResources.length} {filteredResources.length === 1 ? 'resource' : 'resources'} found
           </div>
+
+          {/* Bookmarks Toggle */}
+          <div className="mt-2">
+            <button
+              onClick={() => setShowBookmarked(!showBookmarked)}
+              className={`px-4 py-2 rounded-lg text-sm transition-all flex items-center gap-2 ${
+                showBookmarked
+                  ? 'bg-vamp-purple text-white'
+                  : 'bg-vamp-dark text-zinc-400 hover:text-white'
+              }`}
+            >
+              <Bookmark className={`w-4 h-4 ${showBookmarked ? 'fill-current' : ''}`} />
+              <span>Bookmarked ({bookmarkCount})</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -97,7 +116,12 @@ export default function ResourcesPage() {
         ) : (
           <div className="max-w-4xl mx-auto space-y-4">
             {filteredResources.map(resource => (
-              <ResourceCard key={resource.id} resource={resource} />
+              <ResourceCard
+                key={resource.id}
+                resource={resource}
+                onToggleBookmark={toggleBookmark}
+                isBookmarked={isBookmarked(resource.id)}
+              />
             ))}
           </div>
         )}

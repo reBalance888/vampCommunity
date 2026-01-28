@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { vibecoders } from '@/data/vibecoders'
 import { VibecoderCard } from '@/components/vibecoders/VibecoderCard'
+import { LeaderboardSection } from '@/components/vibecoders/LeaderboardSection'
 import { Search } from 'lucide-react'
 
 export default function VibeccodersPage() {
@@ -56,6 +57,9 @@ export default function VibeccodersPage() {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-12 space-y-12">
+        {/* Leaderboard */}
+        <LeaderboardSection />
+
         {/* Featured */}
         {featuredVibecoders.length > 0 && (
           <section>

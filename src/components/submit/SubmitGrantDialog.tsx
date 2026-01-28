@@ -19,13 +19,13 @@ export function SubmitGrantDialog({ isOpen, onClose }: SubmitGrantDialogProps) {
     sponsorName: '',
     twitter: '',
   })
+  const [showSuccess, setShowSuccess] = useState(false)
 
   if (!isOpen) return null
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Create mailto link with form data
     const subject = `[Vamp Community] Sponsor Grant: ${formData.grantTitle}`
     const body = `
 Grant Title: ${formData.grantTitle}
@@ -46,7 +46,12 @@ I'd like to sponsor a grant program for Vamp Community!
     `.trim()
 
     window.location.href = `mailto:kevin@vampcommunity.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    onClose()
+
+    setShowSuccess(true)
+    setTimeout(() => {
+      setShowSuccess(false)
+      onClose()
+    }, 3000)
   }
 
   return (
@@ -211,6 +216,24 @@ I'd like to sponsor a grant program for Vamp Community!
           </div>
         </form>
       </div>
+
+      {/* Success Modal */}
+      {showSuccess && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="glass rounded-2xl p-8 max-w-md text-center space-y-4">
+            <div className="text-6xl">✅</div>
+            <h3 className="text-2xl font-bold text-white">Grant Submission Sent!</h3>
+            <p className="text-zinc-300">
+              We&apos;ll review your grant within 24-48 hours. Check your Twitter DMs for updates.
+            </p>
+            <div className="pt-4">
+              <p className="text-sm text-zinc-500">
+                This window will close automatically...
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
