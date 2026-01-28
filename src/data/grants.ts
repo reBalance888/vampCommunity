@@ -52,21 +52,16 @@ Rules:
   {
     id: '2',
     slug: 'vamp-grant-2',
-    title: 'Vamp Grant #2: Crypto',
-    description: 'Vamp a VC-funded crypto project using vibecoding tools',
-    longDescription: `Find a VC funded project and go vibecode the best version of that project's vision.
+    title: 'Vamp Grant #2: TBA',
+    description: 'Details coming soon. Stay tuned for the next grant announcement.',
+    longDescription: `Grant #2 is currently being planned.
 
-The intent of this grant is to test the hypothesis - that with current vibecoding tools, what previously required millions in funding can now be done quickly with 1 or 2 people.
-
-Important: Smart contracts MUST be on TESTNET only.`,
+Details, requirements, and timeline will be announced soon. Follow @KSimback on X to stay updated.`,
     amount: 5000,
     currency: 'USDC',
     status: 'upcoming',
     requirements: [
-      'Choose a VC-funded project to vamp',
-      'Public demo link',
-      'GitHub repository',
-      'Smart contracts on TESTNET only',
+      'TBA — requirements will be announced soon',
     ],
     sponsor: {
       name: 'Kevin Simback',
