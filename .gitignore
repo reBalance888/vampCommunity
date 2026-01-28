@@ -51,6 +51,7 @@ next-env.d.ts
 *.tmp
 CONTEXT_FOR_OPUS.md
 FULL_CODE_CONTEXT.txt
+readthisupdate.md.txt
 
 # Claude Code settings (local hooks, not for repo)
 .claude/
