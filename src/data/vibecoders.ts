@@ -122,4 +122,16 @@ export const vibecoders: Vibecoder[] = [
     specialties: ['AI', 'Deep Learning', 'Education'],
     featured: true,
   },
+  {
+    id: '11',
+    slug: 'reBalance888',
+    name: 'reBalance',
+    bio: 'Vibecoder & builder. Creator of TuneArena — AI music battle arena.',
+    avatar: 'https://unavatar.io/twitter/TheTieTieTies',
+    twitter: 'TheTieTieTies',
+    github: 'reBalance888',
+    projectCount: 1,
+    specialties: ['AI', 'Music', 'Creative'],
+    featured: false,
+  },
 ]
