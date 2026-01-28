@@ -4,6 +4,7 @@ import "./globals.css"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { ScrollToTop } from "@/components/ui/scroll-to-top"
+import { FloatingParticles } from "@/components/effects/FloatingParticles"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -37,7 +38,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={`${inter.className} animate-in fade-in`}>
+        <FloatingParticles />
         <Header />
         {children}
         <ScrollToTop />

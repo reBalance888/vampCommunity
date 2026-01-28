@@ -73,10 +73,12 @@ export default function ProjectsPage() {
             <Button
               onClick={() => setIsSubmitDialogOpen(true)}
               size="lg"
-              className="hidden md:inline-flex items-center gap-2"
+              className="hidden md:inline-flex items-center gap-2 relative overflow-hidden group"
             >
-              <Plus className="w-5 h-5" />
-              Submit Project
+              <div className="absolute inset-0 bg-gradient-to-r from-vamp-fuchsia to-vamp-pink opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Plus className="w-5 h-5 relative z-10" />
+              <span className="relative z-10">Submit Project</span>
+              <div className="absolute inset-0 animate-pulse-glow opacity-50" />
             </Button>
           </div>
         </div>

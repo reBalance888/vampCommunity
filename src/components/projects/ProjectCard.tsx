@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Project } from '@/types'
@@ -37,21 +38,39 @@ function highlightText(text: string, query: string) {
 }
 
 export function ProjectCard({ project, isFocused = false, dataIndex, searchQuery = '' }: ProjectCardProps) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const { votes, hasVoted, upvote, isLoading } = useVotes(
     project.id,
     project.initialVotes || 0
   )
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width
+    const y = (e.clientY - rect.top) / rect.height
+    setTilt({
+      x: (y - 0.5) * 10,
+      y: (x - 0.5) * -10
+    })
+  }
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 })
+  }
+
   return (
     <div
       className={cn(
-        'group glass rounded-2xl overflow-hidden transition-all duration-300',
-        'hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]',
-        'hover:-translate-y-1',
-        'hover:border-vamp-purple/30',
+        'group glass rounded-2xl overflow-hidden glow-hover transition-all duration-200',
         isFocused && 'ring-2 ring-vamp-purple ring-offset-2 ring-offset-transparent'
       )}
       data-project-index={dataIndex}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transition: 'transform 0.1s ease-out'
+      }}
     >
       <div className="flex gap-4 p-4">
         {/* Upvote Button */}

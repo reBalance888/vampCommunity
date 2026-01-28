@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
 import { grants } from '@/data/grants'
@@ -11,8 +14,20 @@ import { RecentActivity } from '@/components/home/RecentActivity'
 import { ToolsPopularity } from '@/components/home/ToolsPopularity'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Sparkles, Code2, Trophy } from 'lucide-react'
+import { AnimatedCounter } from '@/components/home/AnimatedCounter'
+import { BentoFeatures } from '@/components/home/BentoFeatures'
 
 export default function Home() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   const featuredProjects = projects.filter(p => p.featured).slice(0, 3)
   const activeGrant = grants.find(g => g.status === 'active')
   // Product of the Day - TuneArena!
@@ -27,6 +42,14 @@ export default function Home() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-vamp-purple/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-vamp-fuchsia/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
+
+        {/* Spotlight effect */}
+        <div
+          className="absolute inset-0 opacity-30 pointer-events-none transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.15), transparent 80%)`
+          }}
+        />
 
         {/* Background glow effect */}
         <div className="absolute inset-0 bg-gradient-radial from-vamp-purple/20 via-transparent to-transparent blur-3xl" />
@@ -69,28 +92,28 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* Stats with Animation */}
+            {/* Stats with Animated Counters */}
             <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
-              <div className="space-y-2 group cursor-default">
-                <p className="text-4xl font-bold text-gradient transition-transform group-hover:scale-110 duration-300">
-                  {projects.length}+
+              <div className="space-y-2">
+                <p className="text-4xl font-bold text-gradient">
+                  <AnimatedCounter end={projects.length} suffix="+" />
                 </p>
-                <p className="text-sm text-zinc-500">Projects Launched</p>
-                <div className="h-1 bg-gradient-to-r from-vamp-purple to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <p className="text-sm text-zinc-500">Projects</p>
               </div>
-              <div className="space-y-2 group cursor-default">
-                <p className="text-4xl font-bold text-gradient transition-transform group-hover:scale-110 duration-300">
-                  ${grants.reduce((sum, g) => sum + g.amount, 0) / 1000}K+
+              <div className="space-y-2">
+                <p className="text-4xl font-bold text-gradient">
+                  $<AnimatedCounter
+                    end={Math.floor(grants.reduce((sum, g) => sum + g.amount, 0) / 1000)}
+                    suffix="K+"
+                  />
                 </p>
                 <p className="text-sm text-zinc-500">in Grants</p>
-                <div className="h-1 bg-gradient-to-r from-vamp-fuchsia to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="space-y-2 group cursor-default">
-                <p className="text-4xl font-bold text-gradient transition-transform group-hover:scale-110 duration-300">
-                  {vibecoders.length}+
+              <div className="space-y-2">
+                <p className="text-4xl font-bold text-gradient">
+                  <AnimatedCounter end={vibecoders.length} suffix="+" />
                 </p>
                 <p className="text-sm text-zinc-500">Vibecoders</p>
-                <div className="h-1 bg-gradient-to-r from-vamp-pink to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </div>
           </div>
@@ -301,6 +324,9 @@ export default function Home() {
 
       {/* Tools Popularity */}
       <ToolsPopularity />
+
+      {/* Bento Features Grid */}
+      <BentoFeatures />
 
       {/* CTA */}
       <section className="container mx-auto px-4 py-20">
