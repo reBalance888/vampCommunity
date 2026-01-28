@@ -54,3 +54,5 @@ FULL_CODE_CONTEXT.txt
 
 # Claude Code settings (local hooks, not for repo)
 .claude/
+
+.vercel
