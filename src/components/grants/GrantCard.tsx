@@ -1,19 +1,25 @@
+'use client'
+
+import { useState } from 'react'
 import { Grant } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
-import { ExternalLink, Clock, CheckCircle2 } from 'lucide-react'
+import { Clock, CheckCircle2 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
+import { ApplyGrantDialog } from './ApplyGrantDialog'
 
 interface GrantCardProps {
   grant: Grant
 }
 
 export function GrantCard({ grant }: GrantCardProps) {
+  const [isApplyOpen, setIsApplyOpen] = useState(false)
   const isActive = grant.status === 'active'
   const timeLeft = grant.deadline ? formatDistanceToNow(new Date(grant.deadline), { addSuffix: true }) : null
 
   return (
+    <>
     <div className={`glass rounded-2xl p-8 space-y-6 ${isActive ? 'border-vamp-purple/30 glow-hover' : ''}`}>
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
@@ -76,19 +82,19 @@ export function GrantCard({ grant }: GrantCardProps) {
       </div>
 
       {/* Action */}
-      {isActive && grant.submitUrl && (
-        <Button className="w-full" asChild>
-          <a
-            href={grant.submitUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2"
-          >
-            <ExternalLink className="w-4 h-4" />
-            Submit on Twitter
-          </a>
+      {isActive && (
+        <Button className="w-full" onClick={() => setIsApplyOpen(true)}>
+          Apply for Grant
         </Button>
       )}
     </div>
+
+    {/* Apply Dialog */}
+    <ApplyGrantDialog
+      isOpen={isApplyOpen}
+      onClose={() => setIsApplyOpen(false)}
+      grantTitle={grant.title}
+    />
+    </>
   )
 }
