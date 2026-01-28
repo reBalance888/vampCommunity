@@ -345,9 +345,9 @@ export default function Home() {
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link href="/vibecoders">
-                Meet Vibecoders
-              </Link>
+              <a href="https://x.com/i/communities/2014384033216553220" target="_blank" rel="noopener noreferrer">
+                Join Community
+              </a>
             </Button>
           </div>
         </div>
