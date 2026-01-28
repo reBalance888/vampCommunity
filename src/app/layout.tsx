@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Vamp Community" }],
   openGraph: {
     title: "Vamp Community - Learn. Build. Earn.",
-    description: "Product Hunt for vibecoding. Discover vibecoded projects, learn from the best resources, and compete for $10K+ in grants.",
+    description: "Product Hunt for vibecoding. Discover vibecoded projects, learn from the best resources, and compete for $5K+ in grants.",
     type: "website",
     images: ["/og-image.svg"],
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://vamp-community.vercel.app',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Vamp Community - Product Hunt for Vibecoding",
-    description: "Discover vibecoded projects, learn, build & earn. 16+ projects, $10K+ grants.",
+    description: "Discover vibecoded projects, learn, build & earn. 16+ projects, $5K+ grants.",
     images: ["/og-image.svg"],
     site: "@KSimback",
     creator: "@KSimback",

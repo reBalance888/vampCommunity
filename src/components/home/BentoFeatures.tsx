@@ -34,7 +34,7 @@ export function BentoFeatures() {
     },
     {
       icon: Trophy,
-      title: '$10K+ Grants',
+      title: '$5K+ Grants',
       description: 'Compete for funding on your projects',
       color: 'from-yellow-500 to-orange-500',
       size: 'col-span-1 row-span-1'
