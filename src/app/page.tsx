@@ -2,12 +2,16 @@ import Link from 'next/link'
 import { projects } from '@/data/projects'
 import { grants } from '@/data/grants'
 import { ProjectCard } from '@/components/projects/ProjectCard'
+import { ProductOfTheDay } from '@/components/home/ProductOfTheDay'
+import { VibecodeExplainer } from '@/components/home/VibecodeExplainer'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Sparkles, Code2, Trophy } from 'lucide-react'
 
 export default function Home() {
   const featuredProjects = projects.filter(p => p.featured).slice(0, 3)
   const activeGrant = grants.find(g => g.status === 'active')
+  // Product of the Day - TuneArena!
+  const productOfTheDay = projects.find(p => p.slug === 'tunearena') || projects[0]
 
   return (
     <main className="min-h-screen bg-vamp-darker">
@@ -35,6 +39,9 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto">
               The home for vibecoded projects. Discover what&apos;s possible when AI meets creativity.
             </p>
+
+            {/* Vibecoding Explainer */}
+            <VibecodeExplainer />
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
@@ -71,6 +78,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Product of the Day */}
+      <ProductOfTheDay project={productOfTheDay} />
 
       {/* Active Grant CTA */}
       {activeGrant && (

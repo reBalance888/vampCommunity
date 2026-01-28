@@ -23,6 +23,7 @@ export const projects: Project[] = [
     tools: ['Claude', 'GPT-4V', 'Next.js', 'Tailwind CSS'],
     featured: true,
     createdAt: '2024-12-15',
+    initialVotes: 342,
   },
   {
     id: '2',
@@ -45,6 +46,7 @@ export const projects: Project[] = [
     tools: ['GPT-4', 'Next.js', 'shadcn/ui', 'Tailwind CSS'],
     featured: true,
     createdAt: '2024-10-01',
+    initialVotes: 521,
   },
   {
     id: '3',
@@ -67,6 +69,7 @@ export const projects: Project[] = [
     tools: ['Claude', 'WebContainers', 'Next.js'],
     featured: true,
     createdAt: '2024-11-20',
+    initialVotes: 489,
   },
   {
     id: '4',
@@ -89,6 +92,7 @@ export const projects: Project[] = [
     tools: ['GPT-4', 'Claude', 'VS Code'],
     featured: true,
     createdAt: '2024-09-01',
+    initialVotes: 612,
   },
   {
     id: '5',
@@ -111,6 +115,7 @@ export const projects: Project[] = [
     tools: ['React', 'Tailwind CSS', 'Framer Motion'],
     featured: false,
     createdAt: '2024-08-15',
+    initialVotes: 187,
   },
   {
     id: '6',
@@ -133,6 +138,7 @@ export const projects: Project[] = [
     tools: ['Vercel AI SDK', 'Next.js', 'OpenAI'],
     featured: false,
     createdAt: '2024-07-10',
+    initialVotes: 234,
   },
   {
     id: '7',
@@ -154,6 +160,7 @@ export const projects: Project[] = [
     },
     tools: ['LlamaIndex', 'OpenAI', 'Pinecone'],
     featured: false,
+    initialVotes: 289,
     createdAt: '2024-06-20',
   },
   {
@@ -176,6 +183,7 @@ export const projects: Project[] = [
     },
     tools: ['GPT-4V', 'tldraw', 'React'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2024-05-15',
   },
   {
@@ -198,6 +206,7 @@ export const projects: Project[] = [
     },
     tools: ['Wasp', 'React', 'Node.js', 'Stripe'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2024-04-10',
   },
   {
@@ -220,6 +229,7 @@ export const projects: Project[] = [
     },
     tools: ['React', 'Next.js', 'D3.js'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2024-03-05',
   },
   {
@@ -242,6 +252,7 @@ export const projects: Project[] = [
     },
     tools: ['Tiptap', 'OpenAI', 'React'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2024-02-20',
   },
   {
@@ -264,6 +275,7 @@ export const projects: Project[] = [
     },
     tools: ['React', 'TypeScript', 'Canvas'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2024-01-15',
   },
   {
@@ -286,6 +298,7 @@ export const projects: Project[] = [
     },
     tools: ['Next.js', 'tRPC', 'Prisma'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2023-12-10',
   },
   {
@@ -308,6 +321,7 @@ export const projects: Project[] = [
     },
     tools: ['Next.js', 'Vercel', 'Upstash'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2023-11-05',
   },
   {
@@ -330,7 +344,31 @@ export const projects: Project[] = [
     },
     tools: ['Next.js', 'OpenAI', 'Supabase'],
     featured: false,
+    initialVotes: 156,
     createdAt: '2023-10-01',
+  },
+  {
+    id: '16',
+    slug: 'tunearena',
+    title: 'TuneArena',
+    description: 'AI music battle arena. Compare AI music models side-by-side and vote for the best tracks.',
+    longDescription: 'A vibecoded platform where users can battle test different AI music generation models. Upload a prompt, generate music with multiple AI models simultaneously, and let the community vote on the best results. Discover which AI creates the most captivating melodies, beats, and compositions. Built with Claude Code for the AI music generation revolution.',
+    image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=400&fit=crop',
+    author: {
+      slug: 'ksimback',
+      name: 'Kevin Simback',
+      twitter: 'KSimback',
+      avatar: 'https://unavatar.io/twitter/KSimback',
+    },
+    categories: ['ai', 'creative', 'web'],
+    links: {
+      demo: 'https://tunearena.xyz',
+      github: 'https://github.com/ksimback/tunearena',
+    },
+    tools: ['Claude Code', 'Next.js', 'Suno AI', 'Udio'],
+    featured: true,
+    createdAt: '2025-01-20',
+    initialVotes: 445,
   },
 ]
 

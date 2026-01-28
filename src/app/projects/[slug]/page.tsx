@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { projects } from '@/data/projects'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,6 +12,33 @@ export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }))
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const project = projects.find(p => p.slug === params.slug)
+  if (!project) return {}
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vamp-community.vercel.app'
+  const projectUrl = `${siteUrl}/projects/${project.slug}`
+
+  return {
+    title: `${project.title} - Vamp Community`,
+    description: project.description,
+    openGraph: {
+      title: `${project.title} - Vibecoded Project`,
+      description: project.description,
+      url: projectUrl,
+      images: [project.image],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.description,
+      images: [project.image],
+      creator: `@${project.author.twitter}`,
+    },
+  }
 }
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {

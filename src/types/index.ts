@@ -20,6 +20,7 @@ export interface Project {
   tools: string[]
   featured: boolean
   createdAt: string
+  initialVotes?: number
 }
 
 export interface Resource {

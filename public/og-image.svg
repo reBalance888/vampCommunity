@@ -1,0 +1,33 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0a0f"/>
+
+  <!-- Gradient glow top-left -->
+  <ellipse cx="200" cy="200" rx="400" ry="300" fill="#8b5cf6" opacity="0.15"/>
+
+  <!-- Gradient glow bottom-right -->
+  <ellipse cx="1000" cy="450" rx="300" ry="250" fill="#d946ef" opacity="0.1"/>
+
+  <!-- Vamp logo / emoji -->
+  <text x="600" y="180" font-size="96" text-anchor="middle" fill="white">🦇</text>
+
+  <!-- Title -->
+  <text x="600" y="300" font-family="Inter, system-ui, sans-serif" font-size="64" font-weight="700" text-anchor="middle" fill="white">Vamp Community</text>
+
+  <!-- Tagline -->
+  <text x="600" y="360" font-family="Inter, system-ui, sans-serif" font-size="28" text-anchor="middle" fill="#71717a">Product Hunt for Vibecoding</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="420" font-family="Inter, system-ui, sans-serif" font-size="20" text-anchor="middle" fill="#52525b">Learn. Build. Earn.</text>
+
+  <!-- Divider -->
+  <line x1="400" y1="460" x2="800" y2="460" stroke="#27272a" stroke-width="1"/>
+
+  <!-- Stats row -->
+  <text x="350" y="510" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" text-anchor="middle" fill="#8b5cf6">16+ Projects</text>
+  <text x="600" y="510" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" text-anchor="middle" fill="#d946ef">$10K+ Grants</text>
+  <text x="850" y="510" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" text-anchor="middle" fill="#ec4899">50+ Vibecoders</text>
+
+  <!-- Bottom URL -->
+  <text x="600" y="580" font-family="Inter, system-ui, sans-serif" font-size="16" text-anchor="middle" fill="#3f3f46">vamp-community.vercel.app</text>
+</svg>

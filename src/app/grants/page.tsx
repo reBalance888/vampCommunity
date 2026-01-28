@@ -1,7 +1,14 @@
+'use client'
+
+import { useState } from 'react'
 import { grants } from '@/data/grants'
 import { GrantCard } from '@/components/grants/GrantCard'
+import { SubmitGrantDialog } from '@/components/submit/SubmitGrantDialog'
+import { DollarSign } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function GrantsPage() {
+  const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false)
   const activeGrants = grants.filter(g => g.status === 'active')
   const upcomingGrants = grants.filter(g => g.status === 'upcoming')
 
@@ -55,16 +62,37 @@ export default function GrantsPage() {
           <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
             Help grow the vibecoding community by sponsoring grants. Reach out to discuss opportunities.
           </p>
-          <a
-            href="https://twitter.com/KSimback"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-vamp-purple to-vamp-fuchsia hover:opacity-90 transition-opacity"
-          >
-            Contact @KSimback
-          </a>
+          <div className="flex gap-4 justify-center">
+            <Button
+              onClick={() => setIsSubmitDialogOpen(true)}
+              size="lg"
+              className="inline-flex items-center gap-2"
+            >
+              <DollarSign className="w-5 h-5" />
+              Sponsor a Grant
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+            >
+              <a
+                href="https://twitter.com/KSimback"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contact @KSimback
+              </a>
+            </Button>
+          </div>
         </section>
       </div>
+
+      {/* Submit Grant Dialog */}
+      <SubmitGrantDialog
+        isOpen={isSubmitDialogOpen}
+        onClose={() => setIsSubmitDialogOpen(false)}
+      />
     </div>
   )
 }

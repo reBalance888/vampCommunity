@@ -3,32 +3,60 @@
 import { useState, useMemo } from 'react'
 import { projects, projectCategories } from '@/data/projects'
 import { ProjectCard } from '@/components/projects/ProjectCard'
-import { Search } from 'lucide-react'
+import { SubmitProjectDialog } from '@/components/submit/SubmitProjectDialog'
+import { useKeyboardNav } from '@/hooks/useKeyboardNav'
+import { Search, Plus, Keyboard } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [sortBy, setSortBy] = useState<'votes' | 'recent'>('votes')
+  const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false)
 
   const filteredProjects = useMemo(() => {
-    return projects.filter(project => {
+    let filtered = projects.filter(project => {
       const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            project.description.toLowerCase().includes(searchQuery.toLowerCase())
       const matchesCategory = selectedCategory === 'all' || project.categories.includes(selectedCategory)
       return matchesSearch && matchesCategory
     })
-  }, [searchQuery, selectedCategory])
+
+    // Sort by votes or recent
+    if (sortBy === 'votes') {
+      filtered = filtered.sort((a, b) => (b.initialVotes || 0) - (a.initialVotes || 0))
+    } else {
+      filtered = filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    }
+
+    return filtered
+  }, [searchQuery, selectedCategory, sortBy])
+
+  const { focusIndex } = useKeyboardNav({ totalItems: filteredProjects.length })
 
   return (
     <div className="min-h-screen bg-vamp-darker">
       {/* Header */}
       <div className="border-b border-white/5">
         <div className="container mx-auto px-4 py-16">
-          <h1 className="text-5xl font-bold text-gradient mb-4">
-            Discover Projects
-          </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl">
-            Explore amazing projects built with vibecoding. Get inspired, learn, and build.
-          </p>
+          <div className="flex items-start justify-between">
+            <div>
+              <h1 className="text-5xl font-bold text-gradient mb-4">
+                Discover Projects
+              </h1>
+              <p className="text-xl text-zinc-400 max-w-2xl">
+                Explore amazing projects built with vibecoding. Get inspired, learn, and build.
+              </p>
+            </div>
+            <Button
+              onClick={() => setIsSubmitDialogOpen(true)}
+              size="lg"
+              className="hidden md:inline-flex items-center gap-2"
+            >
+              <Plus className="w-5 h-5" />
+              Submit Project
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -64,27 +92,97 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-          {/* Results count */}
-          <div className="mt-4 text-sm text-zinc-500">
-            {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'} found
+          {/* Sort & Results */}
+          <div className="mt-4 flex items-center justify-between">
+            <div className="text-sm text-zinc-500">
+              {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'} found
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setSortBy('votes')}
+                className={`px-3 py-1 rounded-lg text-sm transition-all ${
+                  sortBy === 'votes'
+                    ? 'bg-vamp-purple text-white'
+                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                }`}
+              >
+                Most Upvoted
+              </button>
+              <button
+                onClick={() => setSortBy('recent')}
+                className={`px-3 py-1 rounded-lg text-sm transition-all ${
+                  sortBy === 'recent'
+                    ? 'bg-vamp-purple text-white'
+                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                }`}
+              >
+                Most Recent
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Projects Grid */}
+      {/* Projects List */}
       <div className="container mx-auto px-4 py-12">
         {filteredProjects.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-xl text-zinc-500">No projects found. Try different filters.</p>
+          <div className="text-center py-20 space-y-6">
+            <div className="text-6xl">🔍</div>
+            <div>
+              <p className="text-xl text-zinc-300 font-medium">No projects found</p>
+              <p className="text-zinc-500 mt-2">
+                Try a different search, category, or{' '}
+                <button
+                  onClick={() => setIsSubmitDialogOpen(true)}
+                  className="text-vamp-purple hover:underline"
+                >
+                  submit your own project
+                </button>
+              </p>
+            </div>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearchQuery('')
+                setSelectedCategory('all')
+              }}
+            >
+              Clear Filters
+            </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map(project => (
-              <ProjectCard key={project.id} project={project} />
+          <div className="max-w-4xl mx-auto space-y-4">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                isFocused={focusIndex === index}
+                dataIndex={index}
+              />
             ))}
           </div>
         )}
       </div>
+
+      {/* Keyboard Shortcuts Legend */}
+      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="flex items-center gap-3 px-4 py-2 bg-vamp-dark/90 backdrop-blur-lg border border-white/10 rounded-full shadow-lg">
+          <Keyboard className="w-3.5 h-3.5 text-zinc-500" />
+          <div className="flex items-center gap-3 text-xs text-zinc-500">
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300">J</kbd> <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300">K</kbd> navigate</span>
+            <span className="text-zinc-700">·</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300">U</kbd> upvote</span>
+            <span className="text-zinc-700">·</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300">Esc</kbd> clear</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Submit Dialog */}
+      <SubmitProjectDialog
+        isOpen={isSubmitDialogOpen}
+        onClose={() => setIsSubmitDialogOpen(false)}
+      />
     </div>
   )
 }
