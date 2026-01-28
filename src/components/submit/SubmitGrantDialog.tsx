@@ -18,7 +18,6 @@ export function SubmitGrantDialog({ isOpen, onClose }: SubmitGrantDialogProps) {
     deadline: '',
     sponsorName: '',
     twitter: '',
-    email: '',
   })
 
   if (!isOpen) return null
@@ -41,7 +40,6 @@ Deadline: ${formData.deadline}
 Sponsor Information:
 Name: ${formData.sponsorName}
 Twitter: ${formData.twitter}
-Email: ${formData.email}
 
 ---
 I'd like to sponsor a grant program for Vamp Community!
@@ -182,27 +180,14 @@ I'd like to sponsor a grant program for Vamp Community!
               />
             </div>
 
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                Contact Email <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="your@email.com"
-                className="w-full px-4 py-2 bg-vamp-darker border border-white/10 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-vamp-purple transition-colors"
-              />
-            </div>
           </div>
 
           {/* Info */}
           <div className="p-4 bg-vamp-purple/10 border border-vamp-purple/20 rounded-lg">
             <p className="text-sm text-zinc-300">
               📧 Clicking submit will open your email client with pre-filled grant details.
-              No data is collected or stored. We&apos;ll review and get back to you within 48 hours.
+              <span className="font-semibold"> We&apos;ll contact you via Twitter DM</span> — no email needed!
+              No data is collected or stored.
             </p>
           </div>
 
