@@ -145,7 +145,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-8">
               <div className="text-center space-y-2">
                 <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia flex items-center justify-center text-4xl">
-                  📚
+                  ⚡
                 </div>
                 <p className="text-2xl font-bold text-gradient">Learn</p>
                 <p className="text-sm text-zinc-500">Best resources</p>
@@ -155,7 +155,7 @@ export default function Home() {
 
               <div className="text-center space-y-2">
                 <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia flex items-center justify-center text-4xl">
-                  🚀
+                  🔧
                 </div>
                 <p className="text-2xl font-bold text-gradient">Build</p>
                 <p className="text-sm text-zinc-500">Ship projects</p>
@@ -165,7 +165,7 @@ export default function Home() {
 
               <div className="text-center space-y-2">
                 <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia flex items-center justify-center text-4xl">
-                  💰
+                  💎
                 </div>
                 <p className="text-2xl font-bold text-gradient">Earn</p>
                 <p className="text-sm text-zinc-500">Win grants</p>
@@ -262,7 +262,7 @@ export default function Home() {
               {/* Step 1 */}
               <div className="glass rounded-2xl p-8 text-center space-y-4 hover:border-vamp-purple/50 transition-all">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia mx-auto flex items-center justify-center text-3xl">
-                  📚
+                  ⚡
                 </div>
                 <h3 className="text-2xl font-bold text-white">1. Learn</h3>
                 <p className="text-zinc-400">
@@ -276,7 +276,7 @@ export default function Home() {
               {/* Step 2 */}
               <div className="glass rounded-2xl p-8 text-center space-y-4 hover:border-vamp-purple/50 transition-all">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia mx-auto flex items-center justify-center text-3xl">
-                  🚀
+                  🔧
                 </div>
                 <h3 className="text-2xl font-bold text-white">2. Build</h3>
                 <p className="text-zinc-400">
@@ -290,7 +290,7 @@ export default function Home() {
               {/* Step 3 */}
               <div className="glass rounded-2xl p-8 text-center space-y-4 hover:border-vamp-purple/50 transition-all">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia mx-auto flex items-center justify-center text-3xl">
-                  💰
+                  💎
                 </div>
                 <h3 className="text-2xl font-bold text-white">3. Earn</h3>
                 <p className="text-zinc-400">
