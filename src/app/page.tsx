@@ -4,6 +4,8 @@ import { grants } from '@/data/grants'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { ProductOfTheDay } from '@/components/home/ProductOfTheDay'
 import { VibecodeExplainer } from '@/components/home/VibecodeExplainer'
+import { WeeklyTopProjects } from '@/components/home/WeeklyTopProjects'
+import { CommunityVoices } from '@/components/home/CommunityVoices'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Sparkles, Code2, Trophy } from 'lucide-react'
 
@@ -79,6 +81,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why Vamp Exists - Vision Statement */}
+      <section className="border-y border-white/5 bg-gradient-to-b from-vamp-dark/50 to-transparent">
+        <div className="container mx-auto px-4 py-20">
+          <div className="max-w-3xl mx-auto space-y-8">
+            <h2 className="text-4xl font-bold text-white text-center">
+              Why Vamp Exists
+            </h2>
+
+            <div className="space-y-6 text-center">
+              <p className="text-lg text-zinc-300 leading-relaxed">
+                Vibecoding is <span className="text-vamp-purple font-semibold">democratizing software development</span>.
+                Anyone with an idea can now build. But there&apos;s a problem.
+              </p>
+              <p className="text-xl text-white font-semibold">
+                Discoverability is broken. 💔
+              </p>
+              <p className="text-lg text-zinc-300 leading-relaxed">
+                Amazing vibecoded projects are scattered across Twitter threads, GitHub repos,
+                and personal blogs. There&apos;s no single place to discover what&apos;s possible when
+                AI meets human creativity.
+              </p>
+            </div>
+
+            <div className="glass rounded-2xl p-8 space-y-4">
+              <p className="text-xl text-white font-semibold text-center">
+                Vamp Community solves this. 🦇
+              </p>
+              <p className="text-lg text-zinc-300 text-center">
+                We&apos;re <span className="text-vamp-fuchsia font-semibold">Product Hunt for vibecoding</span> —
+                a single place to discover, share, and celebrate vibecoded projects.
+              </p>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-8">
+              <div className="text-center space-y-2">
+                <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia flex items-center justify-center text-4xl">
+                  📚
+                </div>
+                <p className="text-2xl font-bold text-gradient">Learn</p>
+                <p className="text-sm text-zinc-500">Best resources</p>
+              </div>
+
+              <div className="hidden md:block text-3xl text-zinc-600">→</div>
+
+              <div className="text-center space-y-2">
+                <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia flex items-center justify-center text-4xl">
+                  🚀
+                </div>
+                <p className="text-2xl font-bold text-gradient">Build</p>
+                <p className="text-sm text-zinc-500">Ship projects</p>
+              </div>
+
+              <div className="hidden md:block text-3xl text-zinc-600">→</div>
+
+              <div className="text-center space-y-2">
+                <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-vamp-purple to-vamp-fuchsia flex items-center justify-center text-4xl">
+                  💰
+                </div>
+                <p className="text-2xl font-bold text-gradient">Earn</p>
+                <p className="text-sm text-zinc-500">Win grants</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Product of the Day */}
       <ProductOfTheDay project={productOfTheDay} />
 
@@ -148,6 +216,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Weekly Top Projects */}
+      <WeeklyTopProjects />
+
       {/* How It Works */}
       <section className="border-y border-white/5 bg-vamp-dark/50">
         <div className="container mx-auto px-4 py-20">
@@ -205,6 +276,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Community Voices */}
+      <CommunityVoices />
 
       {/* CTA */}
       <section className="container mx-auto px-4 py-20">
