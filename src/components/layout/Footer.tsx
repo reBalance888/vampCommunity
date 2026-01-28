@@ -118,7 +118,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-8 pt-8 border-t border-white/5 text-center">
+          <p className="text-xs text-zinc-600 mb-4">
+            🔒 <span className="text-zinc-500 font-medium">Privacy First:</span> Your votes are stored
+            locally in your browser only. Zero data collection. Zero tracking. Zero servers.
+          </p>
+        </div>
+
+        <div className="pt-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-zinc-500">
             © {currentYear} Vamp Community. Built with vibecoding.
           </p>
