@@ -5,8 +5,10 @@ export const grants: Grant[] = [
     id: '1',
     slug: 'vamp-grant-1',
     title: 'Vamp Grant #1: Community App',
-    description: 'Build the Vamp Community web app - Product Hunt for vibecoding',
-    longDescription: `This grant is to vibecode the Vamp Community web app, the place where people can:
+    description: 'Vibecode the Vamp Community web app — Product Hunt for vibecoding. $5K USDC prize.',
+    longDescription: `Applications for Vamp Grant #1 are now open. Winner will receive $5K in USDC.
+
+This grant is to vibecode the Vamp Community web app, the place where people can:
 
 • Learn from the best curation of vibecoding resources and experts
 • Submit vibecoded projects for grants
@@ -14,20 +16,33 @@ export const grants: Grant[] = [
 • Discover vibecoded projects
 • Get discovered as a vibecoder
 
-Think Product Hunt but specifically for vibecoding.`,
+Think Product Hunt but specifically for vibecoding.
+
+This grant will be awarded to the best submission that meets the goals outlined above and embodies the vision of learn, build, earn.
+
+Rules:
+
+1. You have 48 hours to vibecode your submission and reply to this thread with your entry.
+
+2. Your entry (via reply to this post) should contain the following:
+   • Short pitch on you and your vision for the Vamp app
+   • Link to the app — must be accessible publicly
+   • Link to the GitHub repo
+
+3. Do NOT submit an app that has a connect wallet feature, collects any personal data, or requires anyone to download any tool to use.`,
     amount: 5000,
     currency: 'USDC',
     status: 'active',
-    deadline: '2025-01-22T00:00:00Z',
+    deadline: '2026-01-29T00:00:00Z',
     requirements: [
-      'Public demo link',
-      'GitHub repository',
-      'Short pitch on Twitter',
+      'Short pitch on you and your vision for the Vamp app',
+      'Link to the app — must be accessible publicly',
+      'Link to the GitHub repo',
       'No wallet connect feature',
       'No personal data collection',
       'No download requirements',
     ],
-    submitUrl: 'https://twitter.com/KSimback',
+    submitUrl: 'https://x.com/KSimback/status/2016190180026102039',
     sponsor: {
       name: 'Kevin Simback',
       twitter: 'KSimback',
