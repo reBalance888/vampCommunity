@@ -85,8 +85,22 @@ export default function VibeccodersPage() {
         )}
 
         {filteredVibecoders.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-xl text-zinc-500">No vibecoders found.</p>
+          <div className="text-center py-20 space-y-6">
+            <div className="text-8xl">💻</div>
+            <div>
+              <p className="text-2xl text-white font-bold mb-2">
+                No vibecoders found
+              </p>
+              <p className="text-zinc-400 text-lg">
+                Adjust your search or browse all builders
+              </p>
+            </div>
+            <button
+              onClick={() => setSearchQuery('')}
+              className="px-6 py-2 border-2 border-violet-500/50 text-violet-400 hover:bg-violet-500/10 hover:border-violet-400 rounded-lg text-sm font-medium transition-all"
+            >
+              Clear Search
+            </button>
           </div>
         )}
       </div>

@@ -74,8 +74,25 @@ export default function ResourcesPage() {
       {/* Resources List */}
       <div className="container mx-auto px-4 py-12">
         {filteredResources.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-xl text-zinc-500">No resources found. Try different filters.</p>
+          <div className="text-center py-20 space-y-6">
+            <div className="text-8xl">📚</div>
+            <div>
+              <p className="text-2xl text-white font-bold mb-2">
+                No resources match your search
+              </p>
+              <p className="text-zinc-400 text-lg">
+                Try broader terms or explore all categories
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setSearchQuery('')
+                setSelectedCategory('all')
+              }}
+              className="px-6 py-2 border-2 border-violet-500/50 text-violet-400 hover:bg-violet-500/10 hover:border-violet-400 rounded-lg text-sm font-medium transition-all"
+            >
+              Clear Filters
+            </button>
           </div>
         ) : (
           <div className="max-w-4xl mx-auto space-y-4">

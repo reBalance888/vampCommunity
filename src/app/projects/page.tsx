@@ -123,32 +123,81 @@ export default function ProjectsPage() {
         </div>
       </div>
 
+      {/* How to Submit FAQ */}
+      <div className="container mx-auto px-4 pb-6">
+        <details className="glass rounded-xl overflow-hidden group">
+          <summary className="px-6 py-4 cursor-pointer flex items-center justify-between hover:bg-white/5 transition-colors">
+            <span className="text-white font-medium flex items-center gap-2">
+              <span>❓</span>
+              <span>How to submit your project</span>
+            </span>
+            <svg
+              className="w-5 h-5 text-zinc-400 transition-transform group-open:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+
+          <div className="px-6 pb-6 space-y-4 text-sm">
+            <div className="space-y-2">
+              <p className="text-white font-medium">Q: How do I submit my project?</p>
+              <p className="text-zinc-400">
+                Click &quot;Submit Project&quot; → Fill the form → Your email client opens with pre-filled details → Hit send!
+                We review within 24-48 hours.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-white font-medium">Q: What projects can I submit?</p>
+              <p className="text-zinc-400">
+                Any project built with vibecoding tools like Claude Code, Cursor, v0, Bolt, Lovable, etc.
+                Must have a public demo link.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-white font-medium">Q: How long until my project appears?</p>
+              <p className="text-zinc-400">
+                We manually review all submissions within 24-48 hours to ensure quality.
+                You&apos;ll see your project live after approval.
+              </p>
+            </div>
+          </div>
+        </details>
+      </div>
+
       {/* Projects List */}
       <div className="container mx-auto px-4 py-12">
         {filteredProjects.length === 0 ? (
           <div className="text-center py-20 space-y-6">
-            <div className="text-6xl">🔍</div>
+            <div className="text-8xl animate-bounce">🦇</div>
+
             <div>
-              <p className="text-xl text-zinc-300 font-medium">No projects found</p>
-              <p className="text-zinc-500 mt-2">
-                Try a different search, category, or{' '}
-                <button
-                  onClick={() => setIsSubmitDialogOpen(true)}
-                  className="text-vamp-purple hover:underline"
-                >
-                  submit your own project
-                </button>
+              <p className="text-2xl text-white font-bold mb-2">
+                {searchQuery ? `No vibes found for "${searchQuery}"` : 'No projects in this category'}
+              </p>
+              <p className="text-zinc-400 text-lg">
+                This bat flew into the wrong cave. Try different keywords?
               </p>
             </div>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setSearchQuery('')
-                setSelectedCategory('all')
-              }}
-            >
-              Clear Filters
-            </Button>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedCategory('all')
+                }}
+              >
+                Clear All Filters
+              </Button>
+              <Button onClick={() => setIsSubmitDialogOpen(true)}>
+                Submit Your Project Instead
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="max-w-4xl mx-auto space-y-4">
