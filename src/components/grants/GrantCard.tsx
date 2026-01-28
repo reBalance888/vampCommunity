@@ -31,7 +31,7 @@ export function GrantCard({ grant }: GrantCardProps) {
       <div className="text-center py-6 rounded-xl bg-gradient-to-br from-vamp-purple/20 to-vamp-fuchsia/20 border border-vamp-purple/30">
         <p className="text-sm text-zinc-400 mb-2">Prize</p>
         <p className="text-4xl font-bold text-gradient">
-          ${grant.amount.toLocaleString()} {grant.currency}
+          {grant.amount ? `$${grant.amount.toLocaleString()} ${grant.currency}` : 'TBA'}
         </p>
       </div>
 

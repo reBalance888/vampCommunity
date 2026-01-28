@@ -43,8 +43,8 @@ export interface Grant {
   title: string
   description: string
   longDescription: string
-  amount: number
-  currency: string
+  amount?: number
+  currency?: string
   status: 'active' | 'upcoming' | 'completed'
   deadline?: string
   requirements: string[]

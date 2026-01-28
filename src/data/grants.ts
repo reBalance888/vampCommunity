@@ -57,8 +57,6 @@ Rules:
     longDescription: `Grant #2 is currently being planned.
 
 Details, requirements, and timeline will be announced soon. Follow @KSimback on X to stay updated.`,
-    amount: 5000,
-    currency: 'USDC',
     status: 'upcoming',
     requirements: [
       'TBA — requirements will be announced soon',

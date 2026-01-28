@@ -103,7 +103,7 @@ export default function Home() {
               <div className="space-y-2">
                 <p className="text-4xl font-bold text-gradient">
                   $<AnimatedCounter
-                    end={Math.floor(grants.reduce((sum, g) => sum + g.amount, 0) / 1000)}
+                    end={Math.floor(grants.reduce((sum, g) => sum + (g.amount || 0), 0) / 1000)}
                     suffix="K+"
                   />
                 </p>
@@ -205,7 +205,7 @@ export default function Home() {
                   <div className="flex items-center gap-4">
                     <div>
                       <p className="text-2xl font-bold text-gradient">
-                        ${activeGrant.amount.toLocaleString()} {activeGrant.currency}
+                        {activeGrant.amount ? `$${activeGrant.amount.toLocaleString()} ${activeGrant.currency}` : 'TBA'}
                       </p>
                       <p className="text-sm text-zinc-500">Prize Pool</p>
                     </div>
