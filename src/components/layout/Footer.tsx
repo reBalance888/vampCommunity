@@ -18,7 +18,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="https://twitter.com/KSimback"
+                href="https://x.com/TheTieTieTies"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg hover:bg-white/5 transition-colors"
@@ -26,7 +26,7 @@ export function Footer() {
                 <Twitter className="w-5 h-5 text-zinc-400 hover:text-white transition-colors" />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/reBalance888/vampCommunity"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg hover:bg-white/5 transition-colors"
@@ -96,7 +96,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="https://twitter.com/KSimback"
+                  href="https://x.com/TheTieTieTies"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
@@ -106,7 +106,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/reBalance888/vampCommunity"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
