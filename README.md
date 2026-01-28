@@ -1,128 +1,219 @@
 # 🦇 Vamp Community
 
-**Product Hunt for vibecoding** - Learn. Build. Earn.
+**Product Hunt for Vibecoding** - Learn. Build. Earn.
 
-A community platform for vibecoding enthusiasts to share projects, discover resources, and compete for grants.
+A community platform where vibecoders can discover projects, learn from resources, and compete for grants.
 
-## 🚀 Features
+🔗 **Live Demo:** [Coming Soon]
+📂 **GitHub:** [This Repository]
 
-- **Project Showcase** - Share your AI-powered projects built with Claude, Cursor, v0, and other vibecoding tools
-- **Resource Library** - Curated tutorials, tools, and courses for learning vibecoding
-- **Grants & Challenges** - Compete for funding to bring your ideas to life
-- **Vibecoder Profiles** - Build your reputation and showcase your skills
-- **Upvoting System** - Community-driven project discovery
+---
+
+## ✨ Features
+
+- **Projects Showcase** - Browse 15+ vibecoded projects with search and filters
+- **Learning Resources** - Curated tutorials, tools, and guides for mastering vibecoding
+- **Active Grants** - $10K+ in funding opportunities for builders
+- **Vibecoder Profiles** - Meet the community building with AI
+- **Zero Auth Required** - No wallet connect, no personal data collection
+
+---
 
 ## 🛠 Tech Stack
 
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript (strict mode)
-- **Styling:** Tailwind CSS + shadcn/ui
-- **Database:** Supabase (PostgreSQL)
-- **Auth:** Supabase Auth (GitHub OAuth)
+- **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
+- **Icons:** Lucide React
 - **Deployment:** Vercel
+- **Data:** Static TypeScript files (no database!)
 
-## 📦 Installation
+---
+
+## 🚀 Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/vamp-community.git
+# Clone repository
+git clone https://github.com/YOUR_USERNAME/vamp-community.git
 cd vamp-community
 
 # Install dependencies
 npm install
 
-# Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with your Supabase credentials
-
 # Run development server
 npm run dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the app.
-
-## 🔧 Environment Variables
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_key
-```
+---
 
 ## 📁 Project Structure
 
 ```
 vamp-community/
 ├── src/
-│   ├── app/                  # Next.js app router pages
-│   │   ├── layout.tsx        # Root layout
-│   │   ├── page.tsx          # Home page
-│   │   └── globals.css       # Global styles
-│   ├── components/           # React components
-│   │   └── ui/               # shadcn/ui components
-│   ├── lib/                  # Utilities & config
-│   │   ├── supabase/         # Supabase client setup
-│   │   └── utils.ts          # Helper functions
-│   ├── hooks/                # Custom React hooks
-│   └── types/                # TypeScript types
-├── public/                   # Static assets
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-└── next.config.mjs
+│   ├── app/                    # Next.js pages
+│   │   ├── page.tsx            # Landing page
+│   │   ├── projects/           # Projects pages
+│   │   ├── resources/          # Resources page
+│   │   ├── grants/             # Grants page
+│   │   └── vibecoders/         # Vibecoders pages
+│   ├── components/             # React components
+│   │   ├── ui/                 # Base UI components
+│   │   ├── layout/             # Header, Footer
+│   │   ├── projects/           # Project-specific
+│   │   ├── resources/          # Resource-specific
+│   │   ├── grants/             # Grant-specific
+│   │   └── vibecoders/         # Vibecoder-specific
+│   ├── data/                   # Static data files
+│   │   ├── projects.ts         # 15 projects
+│   │   ├── resources.ts        # 25+ resources
+│   │   ├── grants.ts           # 2 grants
+│   │   └── vibecoders.ts       # 10 vibecoders
+│   ├── types/                  # TypeScript types
+│   └── lib/                    # Utilities
+└── public/                     # Static assets
 ```
+
+---
 
 ## 🎨 Design System
 
-### Colors
-- **Vamp Primary:** `#8b5cf6` (Violet)
-- **Vamp Secondary:** `#c026d3` (Fuchsia)
-- **Vamp Accent:** `#f43f5e` (Rose)
-- **Background:** `#0a0a0b` (Deep Black)
-- **Card:** `#18181b` (Zinc 900)
+### Vamp Theme
 
-### Key Components
-- Gradient buttons with glow effects
-- Glass-morphism cards
-- Animated borders
-- Smooth transitions
+```css
+/* Colors */
+--vamp-darker: #0a0a0f    /* Main background */
+--vamp-dark: #12121a      /* Card backgrounds */
+--vamp-purple: #8b5cf6    /* Primary accent */
+--vamp-fuchsia: #d946ef   /* Secondary accent */
+--vamp-pink: #ec4899      /* Tertiary accent */
+```
 
-## 🚀 Deployment
+### Key Features
 
-### Vercel
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
+- Dark theme with vibrant gradients
+- Glass-morphism UI elements
+- Smooth animations and transitions
+- Responsive mobile design
+- Accessibility-friendly
 
-### Supabase Setup
-1. Create new Supabase project
-2. Run database migrations (see `/supabase/migrations`)
-3. Enable GitHub OAuth provider
-4. Configure RLS policies
-5. Add redirect URLs in Auth settings
+---
 
-## 📝 Scripts
+## 📊 Grant Requirements Checklist
+
+- ✅ Public demo link
+- ✅ GitHub repository
+- ✅ Built with vibecoding (Claude Code)
+- ✅ NO wallet connect
+- ✅ NO personal data collection
+- ✅ NO download requirements
+
+---
+
+## 🚢 Deployment
+
+### Vercel (Recommended)
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm start            # Start production server
-npm run lint         # Run ESLint
-npm run type-check   # TypeScript type checking
+# Build project
+npm run build
+
+# Deploy to Vercel
+vercel deploy --prod
 ```
+
+### Manual Deployment
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## 📝 Adding Data
+
+### Add a Project
+
+Edit `src/data/projects.ts`:
+
+```typescript
+{
+  id: '16',
+  slug: 'my-project',
+  title: 'My Amazing Project',
+  description: 'Built with vibecoding',
+  image: 'https://images.unsplash.com/...',
+  author: {
+    slug: 'myusername',
+    name: 'My Name',
+    twitter: 'myusername',
+    avatar: 'https://unavatar.io/twitter/myusername',
+  },
+  categories: ['ai', 'web'],
+  links: {
+    demo: 'https://myproject.com',
+    github: 'https://github.com/me/myproject',
+  },
+  tools: ['Claude', 'Next.js'],
+  featured: false,
+  createdAt: '2025-01-28',
+}
+```
+
+### Add a Resource
+
+Edit `src/data/resources.ts`:
+
+```typescript
+{
+  id: 'res-new',
+  title: 'My Resource',
+  description: 'Learn something cool',
+  category: 'tutorials',
+  type: 'video',
+  url: 'https://youtube.com/...',
+  author: '@myhandle',
+  free: true,
+}
+```
+
+---
 
 ## 🤝 Contributing
 
-This is a competition submission project. Contributions are welcome after the initial launch!
+This is a competition submission. After the grant period, contributions are welcome!
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing`)
+5. Open a Pull Request
+
+---
 
 ## 📄 License
 
-MIT License - feel free to use this project as inspiration for your own vibecoding platform.
+MIT License - See LICENSE file for details
 
-## 🦇 About
+---
 
-Built for the Vamp Community Grant Challenge - showcasing the power of vibecoding with Claude, Next.js, and modern web technologies.
+## 🙏 Acknowledgments
 
-**Learn. Build. Earn.** 🚀
+- Built for [Vamp Grant #1](https://twitter.com/KSimback) by [@KSimback](https://twitter.com/KSimback)
+- Powered by [Claude Code](https://claude.ai/code)
+- Inspired by Product Hunt and the vibecoding community
+
+---
+
+## 📬 Contact
+
+- **Twitter:** [@KSimback](https://twitter.com/KSimback)
+- **GitHub:** [Issues](https://github.com/YOUR_USERNAME/vamp-community/issues)
+
+---
+
+**Built with vibecoding in 48 hours** 🦇⚡

@@ -3,84 +3,55 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 263 70% 64%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 302 64% 51%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 44%;
-    --muted-foreground: 0 0% 63%;
-    --accent: 349 89% 60%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 263 70% 64%;
-    --radius: 0.75rem;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-[#0a0a0f] text-white;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-vamp bg-clip-text text-transparent;
-  }
-
-  .vamp-glow {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5),
-                0 0 40px rgba(192, 38, 211, 0.3);
-  }
-
-  .vamp-glow-hover {
-    transition: box-shadow 0.3s ease;
-  }
-
-  .vamp-glow-hover:hover {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.7),
-                0 0 60px rgba(192, 38, 211, 0.5);
+    @apply bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent;
   }
 
   .glass {
-    @apply bg-card/80 backdrop-blur-xl border border-white/10;
+    @apply bg-[#12121a]/80 backdrop-blur-xl border border-white/5;
   }
 
-  .border-gradient {
-    @apply relative bg-card rounded-xl;
+  .glow-hover {
+    @apply transition-shadow duration-300;
   }
 
-  .border-gradient::before {
+  .glow-hover:hover {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
     content: '';
-    @apply absolute inset-[-1px] bg-gradient-vamp rounded-[13px] -z-10 opacity-0 transition-opacity duration-300;
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, #8b5cf6, #d946ef, #ec4899);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
   }
 
-  .border-gradient:hover::before {
-    @apply opacity-100;
+  .gradient-border:hover::before {
+    opacity: 1;
   }
 }
 
-/* Scrollbar styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  @apply bg-[#0a0a0f];
 }
 
 ::-webkit-scrollbar-thumb {
@@ -91,7 +62,7 @@
   @apply bg-zinc-700;
 }
 
-/* Selection styling */
+/* Selection */
 ::selection {
-  @apply bg-vamp-primary/30 text-white;
+  @apply bg-purple-500/30 text-white;
 }
